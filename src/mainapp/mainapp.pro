@@ -4,6 +4,8 @@ QT += qml quick multimedia
 
 SOURCES += main.cpp
 
+TARGET = hummbeere
+
 INCLUDEPATH += ../lib
 win32 {
     LIBS += -L../lib/debug -lhummbeere

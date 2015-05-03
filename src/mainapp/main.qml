@@ -1,13 +1,15 @@
 import QtQuick 2.4
 import QtQuick.Window 2.2
-import QtQuick.Controls 1.3
 
 Window {
     visible: true
 
-    ComboBox {
-        width: parent.width
+    ListView {
+        anchors.fill: parent
         model: recorder.inputs
+        delegate: Text {
+            text: modelData
+        }
     }
 
 }
