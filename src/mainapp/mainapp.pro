@@ -1,8 +1,15 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick multimedia
 
 SOURCES += main.cpp
+
+INCLUDEPATH += ../lib
+win32 {
+    LIBS += -L../lib/debug -lhummbeere
+} else {
+    LIBS += -L../lib -lhummbeere
+}
 
 RESOURCES += qml.qrc
 
