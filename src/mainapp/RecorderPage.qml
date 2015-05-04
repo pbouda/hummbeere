@@ -1,6 +1,6 @@
 import QtQuick 2.0
 
-ListView {
+Column {
 
     //model: root.playerMusic.currentPlaylist
 

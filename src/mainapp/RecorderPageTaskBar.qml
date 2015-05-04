@@ -12,7 +12,10 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: recorder.record()
+            onClicked: {
+                recorder.record();
+                console.log("Recording...");
+            }
         }
     }
 
@@ -25,7 +28,9 @@ Rectangle {
 
         MouseArea {
             anchors.fill: parent
-            onClicked: recorder.stop()
+            onClicked: {
+                recorder.stop();
+            }
         }
     }
 
