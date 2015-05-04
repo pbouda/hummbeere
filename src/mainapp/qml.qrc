@@ -1,5 +1,18 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file alias="RootWindow.qml">../beere-qml-components/RootWindow.qml</file>
+        <file alias="TaskBarButton.qml">../beere-qml-components/TaskBarButton.qml</file>
+        <file alias="TitleBar.qml">../beere-qml-components/TitleBar.qml</file>
+        <file alias="Menu.qml">../beere-qml-components/Menu.qml</file>
+        <file alias="helpers.js">../beere-qml-components/helpers.js</file>
+        <file alias="actions.js">../beere-qml-components/actions.js</file>
+        <file>MenuContent.qml</file>
+        <file>RecorderPage.qml</file>
+        <file>RecorderPageTaskBar.qml</file>
+    </qresource>
+    <qresource prefix="/images/">
+        <file alias="media-record.png">images/media-record.png</file>
+        <file alias="media-playback-stop.png">images/media-playback-stop.png</file>
     </qresource>
 </RCC>
