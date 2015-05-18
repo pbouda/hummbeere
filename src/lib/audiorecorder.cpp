@@ -7,24 +7,19 @@ AudioRecorder::AudioRecorder(QObject *parent) : QObject(parent)
 {
     audioRecorder = new QAudioRecorder(this);
 
-    foreach (const QString &device, audioRecorder->audioInputs()) {
+    QStringList inputs = audioRecorder->audioInputs();
+    foreach (const QString &device, inputs) {
         QString description = audioRecorder->audioInputDescription(device);
         qDebug() << description;
     }
-
-    foreach (const QString &codecName, audioRecorder->supportedAudioCodecs()) {
-        qDebug() << codecName;
-    }
-
-    foreach (const QString &containerName, audioRecorder->supportedContainers()) {
-        qDebug() << containerName;
-    }
+    int useInput = 0;
+    audioRecorder->setAudioInput(inputs[useInput]);
+    qDebug() << "Using index " << useInput << ", name " << audioRecorder->audioInputDescription(inputs[useInput]);
 }
 
 QStringList AudioRecorder::inputs() const
 {
     QStringList inputs;
-    inputs.append("Default");
     foreach (const QString &device, audioRecorder->audioInputs()) {
         inputs.append(device);
     }
@@ -33,12 +28,20 @@ QStringList AudioRecorder::inputs() const
 
 QStringList AudioRecorder::codecs() const
 {
-
+    QStringList codecs;
+    foreach (const QString &codecName, audioRecorder->supportedAudioCodecs()) {
+        codecs.append(codecName);
+    }
+    return codecs;
 }
 
 QStringList AudioRecorder::containers() const
 {
-
+    QStringList containers;
+    foreach (const QString &containerName, audioRecorder->supportedContainers()) {
+        containers.append(containerName);
+    }
+    return containers;
 }
 
 QStringList AudioRecorder::sampleRates() const
@@ -110,16 +113,17 @@ void AudioRecorder::record()
     qDebug() << "Start recording";
 
     QAudioEncoderSettings audioSettings;
-    audioSettings.setCodec("audio/speex");
-    audioSettings.setSampleRate(32000);
+    audioSettings.setCodec("audio/PCM");
+    audioSettings.setSampleRate(48000);
     audioSettings.setBitRate(16);
-    audioSettings.setChannelCount(1);
-    audioSettings.setQuality(QMultimedia::VeryHighQuality);
-    audioSettings.setEncodingMode(QMultimedia::ConstantQualityEncoding);
+    audioSettings.setChannelCount(2);
+    //audioSettings.setQuality(QMultimedia::VeryHighQuality);
+    //audioSettings.setEncodingMode(QMultimedia::ConstantQualityEncoding);
 
     audioRecorder->setEncodingSettings(audioSettings);
+    audioRecorder->setContainerFormat("wav");
 
-    audioRecorder->setOutputLocation(QUrl::fromLocalFile("test.speex"));
+    audioRecorder->setOutputLocation(QUrl::fromLocalFile("test.wav"));
     audioRecorder->record();
 }
 
